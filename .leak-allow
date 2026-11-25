@@ -1,0 +1,2 @@
+# check-leaks.sh 허용 목록: 이 고정 문자열을 포함한 줄은 검사에서 제외한다.
+github.com/moais-jjjoonngg/portable-agent-kit

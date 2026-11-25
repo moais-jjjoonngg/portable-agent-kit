@@ -1,0 +1,34 @@
+# 복사해서 사용: cp local/environment.example.yaml local/environment.yaml
+# 보통은 env-capture 스킬이 실제 값으로 채운다. 명세: core/manifest.md
+version: 1
+captured:
+  at: 2026-01-01T09:00:00+09:00
+  host_label: work-laptop
+
+instructions:
+  source: local/instructions/global.md
+  targets:
+    claude: { path: ~/.claude/CLAUDE.md, mode: import }
+    codex:  { path: ~/.codex/AGENTS.md,  mode: link }
+    gemini: { path: ~/.gemini/AGENTS.md, mode: link }
+
+skills:
+  - name: example-skill
+    origin: local
+    path: local/skills/example-skill
+    agents: [claude, codex, gemini]
+
+mcp:
+  - name: example-http
+    transport: http
+    url: https://example.com/mcp
+    auth: oauth
+    agents: [claude, codex, gemini]
+
+tools: []
+
+agents:
+  claude: {}
+  codex: {}
+  gemini:
+    settings: { context.fileName: ["AGENTS.md", "GEMINI.md"] }

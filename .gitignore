@@ -1,0 +1,15 @@
+.DS_Store
+*.pak-bak-*
+.env
+.env.*
+*.pem
+*.key
+
+# 사용자 전역 gitignore가 에이전트 파일을 무시하더라도 키트 파일은 추적한다.
+!.gitignore
+!CLAUDE.md
+!.claude/
+!.claude/skills
+!.gemini/
+!.gemini/settings.json
+!core/adapters/*.md

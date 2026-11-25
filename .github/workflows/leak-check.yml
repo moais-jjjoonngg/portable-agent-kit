@@ -1,0 +1,15 @@
+name: leak-check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  leak-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for leaked secrets and personal data
+        run: bash scripts/check-leaks.sh --history

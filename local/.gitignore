@@ -1,0 +1,8 @@
+# 공개 키트용: 실제 개인 파일은 추적하지 않는다.
+# 개인 private 인스턴스에서는 이 파일을 삭제한다.
+*
+!.gitignore
+!README.md
+!*.example.*
+!instructions/
+!instructions/*.example.*
