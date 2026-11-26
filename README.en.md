@@ -73,9 +73,11 @@ Kit updates change only the example files in `local/` (`*.example.*`, `README.md
 | Codex CLI | 0.172 |
 | Gemini CLI | 0.42 |
 
-## Roadmap
+## Optional modules
 
-- Optional module: daily work log and cross-machine handoff (day-start / day-end)
+| Module | What it does | Enable |
+| --- | --- | --- |
+| [daily-work](modules/daily-work/README.md) | Evidence-based daily work log and cross-machine handoff (`daily-work-resume`, `daily-work-record`) | `scripts/link-skills.sh --module daily-work` |
 
 ## License
 

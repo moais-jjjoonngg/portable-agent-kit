@@ -6,6 +6,8 @@ on:
 
 jobs:
   leak-check:
+    # 개인 private 인스턴스는 설계상 개인 정보를 담으므로 공개 저장소에서만 검사한다.
+    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

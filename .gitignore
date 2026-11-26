@@ -13,3 +13,4 @@
 !.gemini/
 !.gemini/settings.json
 !core/adapters/*.md
+*.local.json

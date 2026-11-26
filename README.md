@@ -73,9 +73,11 @@ git merge upstream/main
 | Codex CLI | 0.172 |
 | Gemini CLI | 0.42 |
 
-## 로드맵
+## 선택 모듈
 
-- 선택 모듈: 일일 업무 기록과 기기 간 인수인계(day-start / day-end)
+| 모듈 | 내용 | 켜기 |
+| --- | --- | --- |
+| [daily-work](modules/daily-work/README.md) | 근거 기반 일일 업무 기록과 기기 간 인수인계(`daily-work-resume`, `daily-work-record`) | `scripts/link-skills.sh --module daily-work` |
 
 ## 라이선스
 

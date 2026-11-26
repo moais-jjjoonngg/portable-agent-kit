@@ -6,3 +6,5 @@
 !*.example.*
 !instructions/
 !instructions/*.example.*
+!daily-work/
+!daily-work/*.example.*

@@ -8,6 +8,8 @@
 - `local/`: 사용자 소유 영역. 개인 프로필, 전역 지침, 개인 스킬, 환경 manifest(`environment.yaml`)를 둔다. 공개 키트에는 `*.example.*`만 있다.
 - `.agents/skills/`: 키트 스킬 원본. Codex·Gemini는 직접 읽고, Claude는 `.claude/skills` 링크로 읽는다.
 - `scripts/`: 스킬 링크 생성(`link-skills.sh`)과 유출 검사(`check-leaks.sh`).
+- `modules/`: 선택 모듈. `scripts/link-skills.sh --module <이름>`으로 켠 모듈의 스킬만 `.agents/skills/`에 링크된다. 켠 모듈은 `modules/<이름>/README.md`를 따른다.
+- `records/`: daily-work 모듈을 켠 개인 인스턴스의 날짜별 업무 기록. 모듈이 켜져 있으면(`.agents/skills/daily-work-*` 존재) 사용자가 `시작`만 입력하면 `daily-work-resume`, `정리`만 입력하면 `daily-work-record`를 추가 확인 없이 실행한다.
 
 ## 스킬
 

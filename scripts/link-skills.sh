@@ -4,6 +4,7 @@
 #   scripts/link-skills.sh              프로젝트: .claude/skills -> ../.agents/skills
 #   scripts/link-skills.sh --global     local/skills/* 를 전역 스킬 경로에 링크
 #   scripts/link-skills.sh --global --include-kit   키트 스킬(.agents/skills/*)도 전역에 링크
+#   scripts/link-skills.sh --module daily-work      선택 모듈 스킬을 .agents/skills에 등록
 #   --dry-run                           실제로 만들지 않고 계획만 출력
 #
 # 전역 경로: ~/.agents/skills (Codex, Gemini), ~/.claude/skills (Claude)
@@ -14,12 +15,20 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GLOBAL=0
 INCLUDE_KIT=0
 DRY_RUN=0
+MODULE=""
+EXPECT_MODULE=0
 for arg in "$@"; do
+  if [ "$EXPECT_MODULE" -eq 1 ]; then
+    MODULE="$arg"
+    EXPECT_MODULE=0
+    continue
+  fi
   case "$arg" in
+    --module) EXPECT_MODULE=1 ;;
     --global) GLOBAL=1 ;;
     --include-kit) INCLUDE_KIT=1 ;;
     --dry-run) DRY_RUN=1 ;;
-    -h|--help) sed -n '2,11p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,12p' "$0"; exit 0 ;;
     *) echo "알 수 없는 옵션: $arg" >&2; exit 2 ;;
   esac
 done
@@ -52,7 +61,22 @@ link() {
   echo "추가  $path -> $target"
 }
 
-if [ "$GLOBAL" -eq 0 ]; then
+if [ "$EXPECT_MODULE" -eq 1 ]; then
+  echo "--module 뒤에 모듈 이름이 필요합니다." >&2
+  exit 2
+fi
+
+if [ -n "$MODULE" ]; then
+  if [ ! -d "$ROOT/modules/$MODULE/skills" ]; then
+    echo "모듈이 없습니다: modules/$MODULE/skills" >&2
+    exit 2
+  fi
+  for d in "$ROOT/modules/$MODULE/skills"/*/; do
+    [ -f "${d}SKILL.md" ] || continue
+    name="$(basename "$d")"
+    link "../../modules/$MODULE/skills/$name" "$ROOT/.agents/skills/$name"
+  done
+elif [ "$GLOBAL" -eq 0 ]; then
   link "../.agents/skills" "$ROOT/.claude/skills"
 else
   sources=()
