@@ -9,10 +9,21 @@
 - `.agents/skills/`: 키트 스킬 원본. Codex·Gemini는 직접 읽고, Claude는 `.claude/skills` 링크로 읽는다.
 - `scripts/`: 스킬 링크 생성(`link-skills.sh`)과 유출 검사(`check-leaks.sh`).
 - `modules/`: 선택 모듈. `scripts/link-skills.sh --module <이름>`으로 켠 모듈의 스킬만 `.agents/skills/`에 링크된다. 켠 모듈은 `modules/<이름>/README.md`를 따른다.
-- `records/`: daily-work 모듈을 켠 개인 인스턴스의 날짜별 업무 기록. 모듈이 켜져 있으면(`.agents/skills/daily-work-*` 존재) 사용자가 `시작`만 입력하면 `daily-work-resume`, `정리`만 입력하면 `daily-work-record`를 추가 확인 없이 실행한다.
+- `records/`: daily-work 모듈을 켠 개인 인스턴스의 날짜별 업무 기록. 짧은 명령은 위의 표를 따른다.
+
+## 짧은 명령
+
+사용자가 아래처럼 입력하면 추가 설명을 요구하지 않고 해당 절차를 시작한다. URL이 함께 오면 그 저장소부터 준비한다.
+
+| 입력 | 절차 |
+| --- | --- |
+| `<git URL> 셋팅 시작`, `셋팅 시작` | `.agents/skills/agent-setup/SKILL.md`: 처음 등록(개인 private 저장소 생성, 설정 수집, push) |
+| `<git URL> 시작`, `시작` | `.agents/skills/env-apply/SKILL.md`로 설정을 동기화한다. daily-work 모듈이 켜져 있으면(`.agents/skills/daily-work-resume` 존재) 이어서 `daily-work-resume`을 실행한다. |
+| `정리` | daily-work 모듈이 켜져 있으면 `daily-work-record`를 실행한다. |
 
 ## 스킬
 
+- 처음 등록: `.agents/skills/agent-setup/SKILL.md`
 - 기존 기기의 설정을 기록: `.agents/skills/env-capture/SKILL.md`
 - 새 기기에 설정을 적용: `.agents/skills/env-apply/SKILL.md`
 - 현재 상태 점검(읽기 전용): `.agents/skills/env-doctor/SKILL.md`
